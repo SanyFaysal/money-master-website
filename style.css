@@ -1,12 +1,14 @@
+/* head name style  */
 .head-name{
     font-size: 45px;;
 }
-
+/* money image  */
 .money-img{
     height: 132vh;
     width: 100%;
     
 }
+/* title of all input  */
 .inputTitle{
     font-weight: 500;
     font-size: 22px;
@@ -15,6 +17,7 @@
 
     
 }
+ /*all input box style  */
 .input{
     border: none;
     /* width: 35%; */
@@ -22,6 +25,7 @@
     border-radius: 5px;
     background-color: rgb(223, 222, 222);
 }
+/* all button style  */
 .button{
     width: 50%;
     display: flex;
@@ -32,6 +36,7 @@
     width: 25%;
     
 }
+/* mobile responsive money image  */
 @media screen and (max-width: 767px) {
     .money-img{
         height: 50vh
