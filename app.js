@@ -16,7 +16,7 @@ function getBalance() {
 
     const allInput = [incomeMoney, foodExpenceAmount, rentExpenceAmount, clothesExpenceAmount];
     for (const input of allInput) {
-        if (typeof parseInt(input) != 'number' || parseInt(input) < 0) {
+        if ((typeof parseFloat(input) != 'number') || (parseFloat(input) < 0)) {
             const notify = alert('please input a valid amount of money');
             balance.innerText = 0;
             totalExpence.innerText = 0;
@@ -25,14 +25,19 @@ function getBalance() {
         }
         else {
 
-            const totalExpenceCalc = parseInt(foodExpenceAmount) + parseInt(rentExpenceAmount) + parseInt(clothesExpenceAmount);
-            totalExpence.innerText = totalExpenceCalc;
-
-            const balanceMoney = parseInt(incomeMoney) - totalExpenceCalc;
-            balance.innerText = balanceMoney;
-
+            const totalExpenceCalc = parseFloat(foodExpenceAmount) + parseFloat(rentExpenceAmount) + parseFloat(clothesExpenceAmount);
+            if (parseFloat(totalExpenceCalc) > parseFloat(incomeMoney)) {
+                const error = alert("sorry ! your total expense is greater than your income ..!")
+                return error;
+            }
+            else {
+                totalExpence.innerText = totalExpenceCalc;
+                const balanceMoney = parseFloat(incomeMoney) - totalExpenceCalc;
+                balance.innerText = balanceMoney;
+            }
         }
     }
+
 
 }
 
@@ -41,15 +46,23 @@ document.getElementById('calculate').addEventListener('click', function () {
 })
 
 document.getElementById('saveMoneyBtn').addEventListener('click', function () {
+
     const savePercentMoney = getInputValue('save-Percent');
     const saveMoney = document.getElementById('save-money');
-    const incomeMoney = parseInt(getInputValue('income'))
+    const incomeMoney = parseFloat(getInputValue('income'))
     const saveMoneyTotal = (incomeMoney * savePercentMoney) / 100;
-    saveMoney.innerText = saveMoneyTotal;
     const balance = document.getElementById('balance').innerText;
-    const remainingBalance = document.getElementById('reamining-balance');
-    const remainingBalanceAmount = parseInt(balance) - saveMoneyTotal;
-    remainingBalance.innerText = remainingBalanceAmount;
+    if (parseFloat(saveMoneyTotal) > parseFloat(balance)) {
+        const errorMsg = alert('sorry ! you have insufficient ballance to save money !!!');
+        return errorMsg;
+    }
+    else {
+        saveMoney.innerText = saveMoneyTotal;
+        const remainingBalance = document.getElementById('reamining-balance');
+        const remainingBalanceAmount = parseFloat(balance) - saveMoneyTotal;
+        remainingBalance.innerText = remainingBalanceAmount;
+    }
+
 })
 document.getElementById('body').addEventListener('click', function () {
 
